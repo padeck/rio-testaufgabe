@@ -2,9 +2,9 @@
 
 Kleine Anwendung zur automatisierten Analyse eingehender Support-Anfragen: Kategorie, Priorität, zuständiges Team und eine kurze Zusammenfassung werden bestimmt, kritische Anfragen als `manual_review_required` markiert, und das Ergebnis persistiert.
 
-**Repo:** https://github.com/padeck/rio-testaufgabe
-**Live:** https://app-production-5a5bc.up.railway.app
-**API-Doku (Swagger):** https://app-production-5a5bc.up.railway.app/docs
+- **Repo:** https://github.com/padeck/rio-testaufgabe
+- **Live:** https://app-production-5a5bc.up.railway.app
+- **API-Doku (Swagger):** https://app-production-5a5bc.up.railway.app/docs
 
 ## Nutzung
 
