@@ -44,18 +44,19 @@ Alle drei Beispielanfragen aus der Aufgabenstellung wurden manuell gegen die lau
 ### Lokal starten
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+uv sync
 cp .env.example .env   # optional: OPENAI_API_KEY eintragen
-uvicorn app.main:app --reload
+uv run uvicorn app.main:app --reload
 ```
+
+(Benötigt [uv](https://docs.astral.sh/uv/); alternativ funktioniert auch ein klassisches `python3 -m venv .venv && pip install -e .`.)
 
 Ohne `OPENAI_API_KEY` läuft die Anwendung vollständig mit der regelbasierten (simulierten) Klassifikation — kein externer Service nötig. Ohne `DATABASE_URL` wird automatisch eine lokale SQLite-Datei (`local.db`) verwendet.
 
 ### Tests
 
 ```bash
-pytest
+uv run pytest
 ```
 
 Die Tests laufen deterministisch: `conftest.py` erzwingt `AI_PROVIDER=simulated` und eine isolierte temporäre SQLite-DB, damit keine echten API-Kosten anfallen und lokale `.env`-Werte die Tests nicht beeinflussen.
@@ -63,6 +64,7 @@ Die Tests laufen deterministisch: `conftest.py` erzwingt `AI_PROVIDER=simulated`
 ## Verwendete Technologien
 
 - **Python 3.11 / FastAPI** — REST-API, automatische OpenAPI-Doku unter `/docs`.
+- **[uv](https://docs.astral.sh/uv/)** für Dependency-Management (`pyproject.toml` + `uv.lock`), lokal und im Docker-Build.
 - **SQLAlchemy 2.x** (typed ORM) — Persistenz; **PostgreSQL** auf Railway (via Railway-Postgres-Plugin), lokal automatischer **SQLite**-Fallback ohne Zusatzaufwand.
 - **OpenAI API** (`gpt-4o-mini`, strukturierte Ausgabe via `json_schema` mit `strict: true`) als eine Stufe der Klassifikation.
 - **pytest** für automatisierte Tests, **GitHub Actions** für CI (führt die Tests bei jedem Push aus).
