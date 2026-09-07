@@ -2,15 +2,16 @@
 
 Kleine Anwendung zur automatisierten Analyse eingehender Support-Anfragen: Kategorie, Priorität, zuständiges Team und eine kurze Zusammenfassung werden bestimmt, kritische Anfragen als `manual_review_required` markiert, und das Ergebnis persistiert.
 
-**Live:** `<TBD nach Deployment>`
-**API-Doku (Swagger):** `<TBD>/docs`
+**Repo:** https://github.com/padeck/rio-testaufgabe
+**Live:** https://app-production-5a5bc.up.railway.app
+**API-Doku (Swagger):** https://app-production-5a5bc.up.railway.app/docs
 
 ## Nutzung
 
 ### Ticket einreichen
 
 ```bash
-curl -X POST https://<live-url>/api/tickets \
+curl -X POST https://app-production-5a5bc.up.railway.app/api/tickets \
   -H "Content-Type: application/json" \
   -d '{"request": "Seit heute Morgen ist das Produktivsystem nicht erreichbar."}'
 ```
@@ -33,7 +34,7 @@ Antwort:
 ### Ergebnis abrufen
 
 ```bash
-curl https://<live-url>/api/tickets/T-49d1ec
+curl https://app-production-5a5bc.up.railway.app/api/tickets/T-49d1ec
 ```
 
 Zusätzlich: `GET /api/tickets?status=manual_review_required` (Liste, optional gefiltert) und `GET /health` (DB-Healthcheck, für das Railway-Deployment).
